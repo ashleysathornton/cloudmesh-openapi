@@ -126,20 +126,20 @@ class Server(object):
     def shutdown(self, name):
 
         Console.ok(f"shutting down server {name}")
-
+        print(name)
         lines = Shell.ps().splitlines()
 
-        for names in lines:
-            if name in names and "server stop" not in names:
-                print(names)
-                process = names.split(' ')
+        for x in lines:
+            if name in x and "server stop" not in x:
+                print(x)
+                process = x.split(' ')
                 api_pid = process[0]
                 print(api_pid)
                 os.kill(int(api_pid), signal.SIGSTOP)
                 Console.ok(f'Server {name} is shut down')
+                break
             else:
                 print("Server not found")
-                break
 
         # check if pid still in list
 
